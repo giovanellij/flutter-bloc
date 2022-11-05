@@ -43,20 +43,33 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: BlocBuilder<CounterBloc, int>(
-          builder: (context, count) {
-            return Text('$count');
-          },
-        ),
+      body: Column(
+        children: [
+          Center(
+            child: BlocBuilder<CounterBloc, int>(
+              builder: (context, count) {
+                return Text('$count');
+              },
+            ),
+          ),
+          Column(
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  counterBloc.add(CounterDecrementPressed());
+                },
+                child: const Text('Decrement'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  counterBloc.add(CounterIncrementPressed());
+                },
+                child: const Text('Increment'),
+              ),
+            ],
+          ),
+        ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          counterBloc.add(CounterIncrementPressed());
-        },
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
